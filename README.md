@@ -5,9 +5,9 @@ This project is a reconciliation system for ONELAB Ventures. It provides tools f
 
 ## Demo Links
 
-You can find demos and more details at the following links:
+You can video demos at the following links:
 
-- [Google Drive Demo](https://drive.google.com/file/d/1ZuL-zERzx1-HwapyP_C_N1ojVGnffV5H/view)
+- [Video Demo](https://drive.google.com/file/d/1ZuL-zERzx1-HwapyP_C_N1ojVGnffV5H/view)
 
 ## Project Structure and File Contents
 
