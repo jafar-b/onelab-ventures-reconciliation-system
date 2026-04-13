@@ -1,0 +1,46 @@
+
+Build a simple payment reconciliation system based in python.
+
+In this:
+
+1. Generate two datasets:
+   1.transactions: id, amount, date, type (payment/refund)
+   2.settlements: id, amount, date
+
+2. The datasets should be intentionally including these issues:
+   1. A transaction at month end settled in the next month
+   2. A rounding difference that is only visible when totals are summed
+   3. A duplicate entry in the settlements dataset
+   4. A refund with no matching original transaction
+
+3. Implement simple functions to detect the gaps:
+   1.Missing settlements
+   2.Late settlements
+   3.Duplicate entries
+   4.Rounding differences
+   5.Invalid refunds
+
+4. Keep implementation simple:
+   1.use only lists and dictionaries
+   2.small, clear functions
+
+5. output format:
+   print detected issues clearly in the console
+   example:
+     Missing settlements detected: [...]
+     Late settlements detected: [...]etc.
+
+
+6. At the end, call all functions and display results.
+
+7. also include:
+   simple test cases validating each issue
+   A short explanation covering:
+     1.what problem this solves  
+     2.how datasets are structured  
+     3.what mismatches are detected  
+     4.example output explanation  
+
+8. provide exactly 3 realistic limitations of this system in production.
+9. Structure the project into separate files
+10.Return full working code and sample output.

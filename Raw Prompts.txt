@@ -1,0 +1,47 @@
+I have an assignment for which i have to create 2 datasets.
+1. transactions
+2.settlements
+
+this will be an assignment to be done in python
+
+the datasets should represent the transactions of a payment company whose transactions and settlements do not match.
+Plant these gaps in the datasets:
+a transaction that settled the following month
+a rounding difference that only shows when summed
+a duplicate entry in one dataset
+a refund with no matching original transaction
+
+create a file and put these two datasets named transactions and settlements, i will be using these to create a reconciliation system that checks these gaps
+
+---
+
+Now i want you to create a simple reconciliation system which would detect these gaps/issues.
+based on the datasets, implement functions which would detect those particular gaps.
+keep the functions simple.
+the output of each function should detect the gaps if present and if the gap/issue is present, just print it in the terminal/console.
+for example:
+Missing settlements detected! : [list of statements]
+Late statements detected! : [list of statements].. etc
+
+at the end, call all functions and print results
+
+---
+
+now write simple test cases to detect each issue
+
+---
+
+Now, explain this reconciliation system in simple terms.
+
+include:
+1.what problem it solves
+2.how the datasets are structured
+3.what mismatches it detects
+4.example output explanation
+
+also give exactly 3 realistic limitations of this system in production.
+Keep it concise
+
+---
+
+just put the reconcilliation functions in a separate file so that dataset,functions and test functions stay separate
