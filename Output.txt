@@ -1,0 +1,58 @@
+PS C:\Users\belda\OneDrive\Desktop\ONELAB VENTURES> python reconciliation.py
+============================================================
+       RECONCILIATION REPORT
+============================================================
+Late Settlements Detected!
+  - TXN011 transacted on 2024-03-28 but settled on 2024-04-02
+
+Rounding Differences Detected!
+  - TXN012 | transaction=33.335, settled=33.34, per-record diff=0.005
+  - TXN013 | transaction=33.335, settled=33.34, per-record diff=0.005
+  - TXN014 | transaction=33.335, settled=33.33, per-record diff=0.005
+  - AGGREGATE drift from rounding = 0.015 (each diff [Decimal('0.005'), Decimal('0.005'), Decimal('0.005')] looks small, but they accumulate)
+
+Duplicate Settlements Detected!
+  - TXN016 settled twice — SET016 and SET016B both on 2024-03-10 for 410.00
+
+Orphan Refunds Detected!
+  - TXN015 is a refund for TXN999 but TXN999 does not exist in transactions
+============================================================
+
+
+
+
+
+PS C:\Users\belda\OneDrive\Desktop\ONELAB VENTURES> python -m unittest test_reconciliation -v 
+test_detects_exact_duplicate (test_reconciliation.TestDuplicateSettlements.test_detects_exact_duplicate)
+Two settlement records with same txn_id, date, and amount should be flagged. ... ok
+test_same_txn_different_date_is_clean (test_reconciliation.TestDuplicateSettlements.test_same_txn_different_date_is_clean)
+Same txn_id settled on two different dates is not a duplicate. ... ok
+test_unique_settlements_are_clean (test_reconciliation.TestDuplicateSettlements.test_unique_settlements_are_clean)
+All unique settlement records should produce no issues. ... ok
+test_detects_settlement_in_next_month (test_reconciliation.TestLateSettlements.test_detects_settlement_in_next_month)
+Transaction in March settled in April should be flagged. ... ok
+test_no_settlement_at_all_does_not_crash (test_reconciliation.TestLateSettlements.test_no_settlement_at_all_does_not_crash)
+Transaction with no settlement entry should not crash or flag a late settlement. ... ok
+test_same_month_settlement_is_clean (test_reconciliation.TestLateSettlements.test_same_month_settlement_is_clean)
+Transaction and settlement in the same month should not be flagged. ... ok
+test_detects_refund_with_missing_original (test_reconciliation.TestOrphanRefunds.test_detects_refund_with_missing_original)
+A refund pointing to a txn_id not in the dataset should be flagged. ... ok
+test_no_refunds_at_all_is_clean (test_reconciliation.TestOrphanRefunds.test_no_refunds_at_all_is_clean)
+Dataset with no refunds should produce no issues. ... ok
+test_refund_with_valid_original_is_clean (test_reconciliation.TestOrphanRefunds.test_refund_with_valid_original_is_clean)
+A refund whose original transaction exists should not be flagged. ... ok
+test_detects_aggregate_drift_across_multiple_records (test_reconciliation.TestRoundingDifferences.test_detects_aggregate_drift_across_multiple_records)
+Three records each with a 0.005 diff should show aggregate drift of 0.015. ... ok
+test_detects_small_per_record_rounding_diff (test_reconciliation.TestRoundingDifferences.test_detects_small_per_record_rounding_diff)
+A settled amount 0.005 away from the transaction should be flagged. ... ok
+test_exact_match_is_clean (test_reconciliation.TestRoundingDifferences.test_exact_match_is_clean)
+Identical transaction and settled amounts should not be flagged. ... ok
+test_large_diff_is_not_flagged_as_rounding (test_reconciliation.TestRoundingDifferences.test_large_diff_is_not_flagged_as_rounding)
+A large discrepancy (e.g. $50) is not a rounding issue and should not appear. ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.003s
+
+OK
+
+
